@@ -1,50 +1,13 @@
-managed implementation in class ZBP_R_RAP_FILE_INFO unique;
-strict ( 2 );
-with draft;
-define behavior for ZR_RAP_FILE_INFO alias ZrRapFileInfo
-persistent table ZRAP_FILE_INFO
-draft table ZRAP_FILE_INFO_D
-etag master LocalLastChangedAt
-lock master total etag LastChangedAt
-authorization master( global )
+unmanaged implementation in class zbp_r_rap_file_info unique;
+strict ( 1 );
 
-
+define behavior for ZR_RAP_FILE_INFO //alias <alias_name>
+//late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
 {
-  field ( mandatory : create )
-   EndUser;
-
-  field ( readonly )
-   LocalCreatedBy,
-   LocalCreatedAt,
-   LocalLastChangedBy,
-   LocalLastChangedAt,
-   LastChangedAt;
-
-  field ( readonly : update )
-   EndUser;
-
-
   create;
   update;
   delete;
-
-  draft action Activate optimized;
-  draft action Discard;
-  draft action Edit;
-  draft action Resume;
-  draft determine action Prepare;
-
-  mapping for ZRAP_FILE_INFO
-  {
-    EndUser = end_user;
-    Status = status;
-    Attachment = attachment;
-    Mimetype = mimetype;
-    Filename = filename;
-    LocalCreatedBy = local_created_by;
-    LocalCreatedAt = local_created_at;
-    LocalLastChangedBy = local_last_changed_by;
-    LocalLastChangedAt = local_last_changed_at;
-    LastChangedAt = last_changed_at;
-  }
 }
