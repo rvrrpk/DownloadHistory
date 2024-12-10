@@ -25,3 +25,5 @@ define root view entity ZR_RAP_FILE_INFO
   last_changed_at as LastChangedAt
   
 }
+
+where end_user <> 'CB9980001708'

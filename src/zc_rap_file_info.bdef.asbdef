@@ -1,13 +1,17 @@
-unmanaged implementation in class zbp_c_rap_file_info unique;
-//strict ( 1 ); //Uncomment this line in order to enable strict mode 1. The strict mode is prerequisite to be future proof regarding syntax and to be able to release your BO.
+projection implementation in class ZBP_C_RAP_FILE_INFO unique;
+strict ( 2 );
+use draft;
+define behavior for ZC_RAP_FILE_INFO alias ZcRapFileInfo
+use etag
 
-define behavior for ZC_RAP_FILE_INFO //alias <alias_name>
-//late numbering
-lock master
-authorization master ( instance )
-//etag master <field_name>
 {
-  create;
-  update;
-  delete;
+//  use create;
+//  use update;
+//  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
 }
